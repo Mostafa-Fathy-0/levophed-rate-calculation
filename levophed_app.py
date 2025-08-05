@@ -34,4 +34,5 @@ def calculate_rate(dose, weight, volume, concentration):
 rate = calculate_rate(dose, weight, volume_ml, concentration_mg)
 
 st.success(f"💧 Infusion Rate: **{rate} mL/hr**")
-st.markdown(f"➡️ Based on: {dose} mcg/kg/min, {weight} kg, {concentration_mg} mg in 50 mL")
+st.markdown(f"➡️ Based on: {dose} mcg/kg/min, {weight} kg, {concentration_mg} mg/mL")
+
