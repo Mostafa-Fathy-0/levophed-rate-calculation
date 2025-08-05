@@ -19,7 +19,7 @@ dose = st.selectbox("Select Dose (mcg/kg/min):", options=dose_options)
 
 # --- Input: Concentration selection ---
 concentration_mg = st.selectbox(
-    "Select Concentration (mg per 50 mL):",
+    "Select Concentration (mg per mL):",
     options=[4, 8]
 )
 
@@ -35,4 +35,5 @@ rate = calculate_rate(dose, weight, volume_ml, concentration_mg)
 
 st.success(f"💧 Infusion Rate: **{rate} mL/hr**")
 st.markdown(f"➡️ Based on: {dose} mcg/kg/min, {weight} kg, {concentration_mg} mg/mL")
+
 
