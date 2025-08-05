@@ -1,22 +1,23 @@
 import streamlit as st
 
-# Fixed values
-concentration_mg = 8
-volume_ml = 50
-doses = [0.1, 0.2, 0.3, 0.5, 1.0]  # Common dose examples in mcg/kg/min
+# --- Fixed Parameters ---
+concentration_mg = 8  # mg
+volume_ml = 50        # mL
 
-# Title
+# --- Streamlit App ---
+st.set_page_config(page_title="Levophed Calculator", layout="centered")
 st.title("💉 Levophed Infusion Rate Calculator")
 
-# Input: only weight
+# --- User Inputs ---
 weight = st.number_input("Enter Patient Weight (kg):", min_value=1.0, max_value=300.0, value=70.0, step=0.5)
 
-# Function to calculate rate
+dose_options = [round(x * 0.1, 1) for x in range(1, 11)]  # 0.1 to 1.0
+dose = st.selectbox("Select Dose (mcg/kg/min):", options=dose_options)
+
+# --- Calculation Function ---
 def calculate_rate(dose, weight, volume, concentration):
     return round((dose * 60 * weight * volume) / (1000 * concentration), 2)
 
-# Output results
-st.subheader("Infusion Rates (mL/hr):")
-for dose in doses:
-    rate = calculate_rate(dose, weight, volume_ml, concentration_mg)
-    st.write(f"- For {dose} mcg/kg/min: **{rate} mL/hr**")
+# --- Calculate & Display ---
+rate = calculate_rate(dose, weight, volume_ml, concentration_mg)
+st.success(f"💧 Infusion Rate: **{rate} mL/hr** for {dose} mcg/kg/min at {weight} kg")
